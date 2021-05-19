@@ -1,11 +1,14 @@
 import app
+import json
+from pandas import DataFrame
 
 class VideoSqlOperations():
     def retrieveUploadedVideo(self):
         cur = app.conn.cursor()
-        cur.execute(f"SELECT * FROM videoanalysisresults ORDER BY id ASC LIMIT 100")
-        result = cur.fetchall()
-        return result
+        cur.execute(f"SELECT * FROM videoanalysisresults")
+        df = DataFrame(cur.fetchall())
+        df.columns = [desc[0] for desc in cur.description]
+        return df
 
 class SensorSqlOperations():
     def insertNewRecord(self,userid,uploaddate):
