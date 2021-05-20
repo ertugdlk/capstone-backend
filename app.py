@@ -7,12 +7,9 @@ import repository
 import decimal
 
 app = Flask(__name__)
-conn = psycopg2.connect(user='root', password='Capstone2021', port=5432,
-                        host='capstone.csmts1kw9sus.eu-central-1.rds.amazonaws.com',
+conn = psycopg2.connect(user='root', password='', port=5432,
+                        host='',
                         database='capstone')
-def myconverter(o):
-    if isinstance(o, datetime.datetime):
-        return o.__str__()
 
 @app.route('/')
 def hello_world():
