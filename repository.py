@@ -10,6 +10,12 @@ class VideoSqlOperations():
         df.columns = [desc[0] for desc in cur.description]
         return df
 
+
+    def insertNewRecordVideo(self,dispacelementxy,displacemenettime):
+        query = f"INSERT INTO videodisplacementhistory(dispacelementxy, displacemenettime) VALUES({dispacelementxy}, {displacemenettime})"
+        cur = app.conn.cursor()
+        cur.execute(query)
+
 class SensorSqlOperations():
     def insertNewRecord(self,userid,uploaddate):
         query = f"INSERT INTO uploadsensordata(userid, uploaddate) VALUES({userid}, {uploaddate})"
