@@ -16,6 +16,15 @@ class VideoSqlOperations():
         cur = app.conn.cursor()
         cur.execute(query)
 
+    def retrieveUploadedVideoRecords(self):
+        cur = app.conn.cursor()
+        cur.execute(f"SELECT * FROM videoanalysisresults as va JOIN videodisplacementhistory as vd va.id = vd.videoanalysisid")
+        df = DataFrame(cur.fetchall())
+        df.columns = [desc[0] for desc in cur.description]
+        return df
+
+
+
 class SensorSqlOperations():
     def insertNewRecord(self,userid,uploaddate):
         query = f"INSERT INTO uploadsensordata(userid, uploaddate) VALUES({userid}, {uploaddate})"
